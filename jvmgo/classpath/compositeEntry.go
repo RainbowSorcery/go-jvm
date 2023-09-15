@@ -18,17 +18,18 @@ func newCompositeEntry(path string) CompositeEntry {
 	return compositeEntry
 }
 
-
-
-func (t CompositeEntry) readClass(className string) ([]byte, Entry, error) {
+func (t CompositeEntry) ReadClass(className string) ([]byte, Entry, error) {
 	for _, entry := range t {
-		return entry.readClass(className)
+		class, e, err := entry.ReadClass(className)
+		if err == nil {
+			return class, e, err
+		}
 	}
 
 	return nil, nil, errors.New("class not found: " + className)
 }
 
-func (t CompositeEntry) String()  string {
+func (t CompositeEntry) String() string {
 	StringList := make([]string, len(t))
 
 	for i, entry := range t {

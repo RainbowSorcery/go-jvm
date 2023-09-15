@@ -19,18 +19,18 @@ func newDirEntry(path string) *DirEntry {
 	return &DirEntry{absPath: absPath}
 }
 
-func (t *DirEntry) readClass(className string) ([]byte, Entry, error) {
-	fileName := filepath.Join(className, t.absPath)
+func (t *DirEntry) ReadClass(className string) ([]byte, Entry, error) {
+	fileName := filepath.Join(t.absPath, className)
 
 	data, err := os.ReadFile(fileName)
 
 	if err != nil {
-		panic(err)
+		return nil, nil, err
 	}
 
 	return data, t, err
 }
 
-func (t *DirEntry) String() string  {
+func (t *DirEntry) String() string {
 	return t.absPath
 }

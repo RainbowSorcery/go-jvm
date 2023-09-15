@@ -21,7 +21,7 @@ func newZipEntry(path string) *DirEntry {
 	return &DirEntry{absPath: absPath}
 }
 
-func (t *zipEntry) readClass(className string) ([]byte, Entry, error) {
+func (t *zipEntry) ReadClass(className string) ([]byte, Entry, error) {
 	// 遍历zip中的所有文件 判断文件名称是否与传入的文件名称一致 如果一致则读出来并返回 如果在读取的过程中出现了错误则捕获错误并返回
 
 	reader, err := zip.OpenReader(t.absPath)

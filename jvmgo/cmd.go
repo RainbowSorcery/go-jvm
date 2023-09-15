@@ -3,7 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"jvm/jvmgo/classpath"
 	"os"
+	"strings"
 )
 
 type Cmd struct {
@@ -45,4 +47,10 @@ func printUsage() {
 func startJVM(cmd *Cmd) {
 	fmt.Printf("classpath:%s class: %s args: %v\n", cmd.cpOption, cmd.class, cmd.args)
 
+	parse := classpath.Parse(cmd.xjreOption, cmd.cpOption)
+	class, entry, err := parse.ReadClass(strings.Replace(cmd.class, ".", "/", -1))
+
+	fmt.Print(class)
+	fmt.Print(entry)
+	fmt.Print(err)
 }
