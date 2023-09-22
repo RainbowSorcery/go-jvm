@@ -17,6 +17,10 @@ func newEntry(path string) Entry {
 		return newCompositeEntry(path)
 	}
 
+	if strings.HasSuffix(path, "*") {
+		return newWildcardEntry(path)
+	}
+
 	if strings.HasSuffix(path, ".jar") || strings.HasSuffix(path, ".zip") {
 		return newZipEntry(path)
 	}

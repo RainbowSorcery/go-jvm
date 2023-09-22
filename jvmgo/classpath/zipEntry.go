@@ -11,14 +11,14 @@ type zipEntry struct {
 	absPath string // class文件绝对路径
 }
 
-func newZipEntry(path string) *DirEntry {
+func newZipEntry(path string) *zipEntry {
 	absPath, err := filepath.Abs(path)
 
 	if err != nil {
 		panic(err)
 	}
 
-	return &DirEntry{absPath: absPath}
+	return &zipEntry{absPath: absPath}
 }
 
 func (t *zipEntry) ReadClass(className string) ([]byte, Entry, error) {
